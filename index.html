@@ -1,11 +1,431 @@
 <!DOCTYPE html>
-<html>
-<head><title>Stats Course Apps</title></head>
-<body style="font-family: sans-serif; margin: 40px;">
-  <h1>Statistics Course Interactive Apps</h1>
-  <ul>
-    <li><a href="hw3/">Homework 3: Continuous Distributions Lab</a></li>
-    <li><a href="hw4/">Homework 4: Hypothesis Testing Lab</a></li>
-  </ul>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyle Peterson | Interactive Statistics & Projects</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --navy: #232D4B;       /* UVA Navy */
+      --orange: #E57200;     /* UVA Orange */
+      --orange-light: #fff4eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Header / Hero Banner */
+    header {
+      background: linear-gradient(135deg, var(--navy) 0%, #161d31 100%);
+      color: #ffffff;
+      padding: 3.5rem 1.5rem 3rem;
+      border-bottom: 5px solid var(--orange);
+    }
+
+    .header-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .header-badge {
+      display: inline-block;
+      width: fit-content;
+      background: rgba(229, 114, 0, 0.2);
+      color: #ffb366;
+      border: 1px solid rgba(229, 114, 0, 0.4);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: #cbd5e1;
+      font-size: 1.08rem;
+      max-width: 680px;
+    }
+
+    /* Sticky Quick Navigation */
+    .top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .nav-container a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-container a:hover {
+      color: var(--navy);
+      background: #f1f5f9;
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 4.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-pill {
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Grid for App Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(35, 45, 75, 0.08), 0 8px 10px -6px rgba(35, 45, 75, 0.04);
+      border-color: #cbd5e1;
+    }
+
+    .card-tag {
+      display: inline-block;
+      width: fit-content;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--orange);
+      background: var(--orange-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .app-card h3 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .app-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--navy);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.6rem 1.1rem;
+      border-radius: 8px;
+      transition: background-color 0.15s ease;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--orange);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO HEADER -->
+  <header>
+    <div class="header-container">
+      <span class="header-badge">Department of Statistics &bull; University of Virginia</span>
+      <h1>Kyle Peterson</h1>
+      <p>Interactive Shiny applications, simulation labs, and course applets for undergraduate statistics and research projects.</p>
+    </div>
+  </header>
+
+  <!-- STICKY NAVIGATION BAR -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="#stat3110">STAT 3110: Foundations of Statistics</a>
+      <a href="#stat1602">STAT 1602: Intro to Data Science with R</a>
+      <a href="#projects">Personal &amp; Research Projects</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT SECTIONS -->
+  <main>
+    <!-- STAT 3110 SECTION -->
+    <section id="stat3110">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-pill">STAT 3110</span>
+          <h2>Foundations of Statistics</h2>
+        </div>
+        <span class="section-subtitle">Interactive Homework and Lecture Tools</span>
+      </div>
+      <div id="grid-stat3110" class="card-grid"></div>
+    </section>
+
+    <!-- STAT 1602 SECTION -->
+    <section id="stat1602">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-pill">STAT 1602</span>
+          <h2>Introduction to Data Science with R</h2>
+        </div>
+        <span class="section-subtitle">Interactive Lecture Tools</span>
+      </div>
+      <div id="grid-stat1602" class="card-grid"></div>
+    </section>
+
+    <!-- RESEARCH PROJECTS SECTION -->
+    <section id="projects">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-pill">Research</span>
+          <h2>Research Projects</h2>
+        </div>
+        <span class="section-subtitle">Vector Field Model Mixing EDA Visualization</span>
+      </div>
+      <div id="grid-research" class="card-grid"></div>
+    </section>
+
+    <!-- PERSONAL PROJECTS SECTION -->
+    <section id="projects">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-pill">Personal</span>
+          <h2>Personal Projects</h2>
+        </div>
+        <span class="section-subtitle">Random Personal Projects</span>
+      </div>
+      <div id="grid-personal" class="card-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Kyle Peterson &bull; Powered by R Shinylive &amp; GitHub Pages
+  </footer>
+
+
+  <!-- ===================================================================== -->
+  <!-- EASY UPDATE AREA: ADD OR EDIT YOUR APPS BELOW!                        -->
+  <!-- To add a new app, just copy one of the { ... } blocks and change the  -->
+  <!-- title, tag, description, and folder link!                             -->
+  <!-- ===================================================================== -->
+  <script>
+    const APPS_DATA = {
+      
+      // 1. STAT 3110 APPS
+      stat3110: [
+        {
+          title: "Homework 7",
+          tag: "Questions 3-5",
+          description: "Explore three mystery empirical datasets by fitting Uniform, Exponential, Gamma, Normal, and Beta densities.",
+          link: "STAT 3110 Homework 7/",           // <-- Name of the subfolder in your repo
+          buttonText: "Launch Lab App →"
+        }
+        // Copy and paste a new block here for your next STAT 3110 app!
+      ],
+
+      // 2. STAT 1602 APPS
+      stat1602: [
+        // Example placeholder (delete or edit when you add your first 1602 app):
+        /*
+        {
+          title: "Data Wrangling & ggplot2 Explorer",
+          tag: "Course Applet",
+          description: "Interactive sandbox for exploring tidyverse transformations and aesthetic mappings.",
+          link: "stat1602-app1/",
+          buttonText: "Launch App →"
+        }
+        */
+      ],
+
+      // 3. RESEARCH PROJECTS
+      research: [
+        // Example placeholder (uncomment or edit when ready):
+        /*
+        {
+          title: "Vector Field & Trajectory Simulator",
+          tag: "Research Tool",
+          description: "Interactive visualization of particle trajectories, piecewise weights, and interpolation diagnostics.",
+          link: "trajectory-app/",
+          buttonText: "Open Tool →"
+        }
+        */
+      ],
+
+      // 4. PERSONAL PROJECTS
+      personal: [
+        // Example placeholder (uncomment or edit when ready):
+        /*
+        {
+          title: "Vector Field & Trajectory Simulator",
+          tag: "Research Tool",
+          description: "Interactive visualization of particle trajectories, piecewise weights, and interpolation diagnostics.",
+          link: "trajectory-app/",
+          buttonText: "Open Tool →"
+        }
+        */
+      ]
+    };
+
+    // =====================================================================
+    // AUTOMATIC PAGE BUILDER (No need to edit below this line)
+    // =====================================================================
+    function renderSection(sectionKey, containerId) {
+      const container = document.getElementById(containerId);
+      const items = APPS_DATA[sectionKey] || [];
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="empty-state">No interactive apps posted in this section yet. Check back soon!</div>`;
+        return;
+      }
+
+      container.innerHTML = items.map(app => `
+        <article class="app-card">
+          <div>
+            <span class="card-tag">${app.tag}</span>
+            <h3>${app.title}</h3>
+            <p>${app.description}</p>
+          </div>
+          <div class="card-actions">
+            <a class="btn-primary" href="${app.link}">${app.buttonText || 'Launch App →'}</a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    renderSection('stat3110', 'grid-stat3110');
+    renderSection('stat1602', 'grid-stat1602');
+    renderSection('projects', 'grid-projects');
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
