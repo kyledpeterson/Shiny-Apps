@@ -434,7 +434,7 @@ mysteryTabServer <- function(id, dataset, x_limits, step_size, var_step, file_la
 # 5. MAIN UI & SERVER INITIALIZATION
 # ==============================================================================
 ui <- page_navbar(
-  title = "Continuous Distributions: Mystery Datasets",
+  title = "STAT 3110: Homework 7",
   theme = bs_theme(version = 5, bootswatch = "flatly"),
   
   mysteryTabUI(
