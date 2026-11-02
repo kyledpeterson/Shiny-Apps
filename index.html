@@ -272,7 +272,7 @@
   <nav class="top-nav">
     <div class="nav-container">
       <a href="#stat3110">STAT 3110: Foundations of Statistics</a>
-      <a href="#stat1602">STAT 1602: Intro to Data Science with R</a>
+      <a href="#tools">Instructional Tools</a>
       <a href="#research">Research Projects</a>
       <a href="#personal">Personal Projects</a>
     </div>
@@ -293,15 +293,15 @@
     </section>
 
     <!-- STAT 1602 SECTION -->
-    <section id="stat1602">
+    <section id="tools">
       <div class="section-header">
         <div class="section-title-group">
-          <span class="section-pill">STAT 1602</span>
-          <h2>Introduction to Data Science with R</h2>
+          <span class="section-pill">Lectures</span>
+          <h2>Instructional Tools</h2>
         </div>
         <span class="section-subtitle">Interactive Lecture Tools</span>
       </div>
-      <div id="grid-stat1602" class="card-grid"></div>
+      <div id="grid-tools" class="card-grid"></div>
     </section>
 
     <!-- RESEARCH PROJECTS SECTION -->
@@ -345,14 +345,6 @@
       // 1. STAT 3110 APPS
       stat3110: [
         {
-          title: "Poisson Process Simulation",
-          tag: "Poisson Process",
-          description: "Simulate a Poisson process to understand Poisson and Exponential random variables.",
-          link: "Poisson Process/",           // <-- Name of the subfolder in your repo
-          buttonText: "Launch App →"
-        },
-        
-        {
           title: "Homework 7",
           tag: "Questions 3-5",
           description: "Explore three mystery empirical datasets by fitting Uniform, Exponential, Gamma, Normal, and Beta densities.",
@@ -370,8 +362,8 @@
         // Copy and paste a new block here for your next STAT 3110 app!
       ],
 
-      // 2. STAT 1602 APPS
-      stat1602: [
+      // 2. Instructional Tools
+      tools: [
         {
           title: "Central Limit Theorem",
           tag: "CLT",
@@ -394,8 +386,16 @@
           description: "Interactive tool to explore least squares linear regression through numerically minimizing the root mean squared error.",
           link: "Linear Regression - RMSE Minimization/",
           buttonText: "Launch App →"
+        },
+        
+        {
+          title: "Poisson Process Simulation",
+          tag: "Poisson Process",
+          description: "Simulate a Poisson process to understand Poisson and Exponential random variables.",
+          link: "Poisson Process/",           // <-- Name of the subfolder in your repo
+          buttonText: "Launch App →"
         }
-
+        
       ],
 
       // 3. RESEARCH PROJECTS
@@ -475,7 +475,7 @@
     }
 
     renderSection('stat3110', 'grid-stat3110');
-    renderSection('stat1602', 'grid-stat1602');
+    renderSection('tools', 'grid-tools');
     renderSection('research', 'grid-research');
     renderSection('personal', 'grid-personal');
     document.getElementById('year').textContent = new Date().getFullYear();
